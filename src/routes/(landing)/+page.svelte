@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import Game from './Game.svelte';
-	import type { Game as GameClass } from './Models/yam';
-	import { loadYamStores } from './Models/store-load';
-	import { newGame } from './Models/store-games';
-	import GamesList from './GamesList.svelte';
-	import { buildersArray, type buildersKey } from './Models/Builders';
-	import GridMode from './GridMode.svelte';
+	import Game from '$lib/components/App-YamBase/Game.svelte';
+	import type { Game as GameClass } from '$lib/models/yam';
+	import { loadYamStores } from '$lib/models/store-load';
+	import { newGame } from '$lib/models/store-games';
+	import GamesList from '$lib/components/App-YamBase/GamesList.svelte';
+	import { buildersArray, type buildersKey } from '$lib/models/Builders';
+	import GridMode from '$lib/components/App-YamBase/GridMode.svelte';
 
 	let game: GameClass | undefined = undefined;
 	$: gridMode = game?.gridMode;
