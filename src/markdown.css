@@ -1,0 +1,59 @@
+.markdown h1 {
+	@apply mb-5 text-2xl font-bold;
+}
+
+.markdown h2 {
+	@apply mb-2 text-lg font-semibold;
+}
+.markdown h3 {
+	@apply mb-1 mt-2 text-[17px] font-bold;
+}
+
+.markdown strong {
+	@apply font-semibold text-black dark:text-white;
+}
+.markdown p {
+	@apply pb-2 text-black/80 dark:text-white/70;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+	@apply text-balance;
+}
+
+.markdown a {
+	@apply font-semibold text-blueBank;
+}
+
+.markdown li {
+	@apply mb-1 text-balance;
+}
+
+.markdown ul {
+	@apply ml-6 list-disc;
+}
+
+.markdown ol {
+	@apply ml-6 list-decimal;
+}
+
+.markdown td,
+.markdown th {
+	@apply border px-3 py-1 text-left text-balance;
+}
+
+.markdown table {
+	@apply mb-5;
+}
+
+.markdown .video {
+	@apply mb-8 mt-8 aspect-video w-full;
+}
+
+.markdown img {
+	@apply mb-8 mt-8;
+}

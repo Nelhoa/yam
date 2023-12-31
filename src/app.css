@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+@import 'markdown.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	input::-webkit-inner-spin-button,
+	input::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+
+	svg {
+		@apply fill-current;
+	}
+
+	.signInput {
+		@apply w-full rounded border border-black/10 bg-white px-3 py-[2px] read-only:border-black/5 read-only:bg-white/20 read-only:text-black/50 focus:shadow focus:outline-none dark:bg-white/10 dark:hover:border dark:hover:border-white/10 dark:focus:border dark:focus:border-white/5;
+	}
+
+	.selectInput {
+		@apply w-full truncate rounded border border-black/10 bg-white px-3 py-[2px] focus:shadow focus:outline-none disabled:border-black/5 disabled:bg-white/20 disabled:text-black/50 dark:bg-white/10 dark:hover:border dark:hover:border-white/10 dark:focus:border dark:focus:border-white/5;
+	}
+
+	.invalid {
+		@apply mt-1 px-[2px] text-sm font-semibold text-yellow-600 text-balance dark:text-orange-400;
+	}
+}
+
+*::-webkit-scrollbar {
+	width: 7px;
+	height: 7px;
+	/* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+	background: rgba(0, 0, 0, 0);
+	/* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0);
+	/* color of the scroll thumb */
+	border-radius: 20px;
+	/* roundness of the scroll thumb */
+	/* creates padding around scroll thumb */
+}
+
+*:hover::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0.1);
+	/* color of the scroll thumb */
+	border-radius: 20px;
+	/* roundness of the scroll thumb */
+	/* creates padding around scroll thumb */
+}
+
+.splitpanes.modern-theme .splitpanes__pane {
+	background-color: transparent;
+}
+
+.splitpanes.modern-theme .splitpanes__splitter {
+	background-color: rgba(0, 0, 0, 0.05);
+	position: relative;
+}
+
+.dark .splitpanes.modern-theme .splitpanes__splitter {
+	background-color: rgba(255, 255, 255, 0.09);
+}
+
+.splitpanes.modern-theme .splitpanes__splitter:before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	transition: opacity 0.4s;
+	background-color: #009dff7a;
+	opacity: 0;
+	z-index: 1;
+}
+
+.splitpanes.modern-theme .splitpanes__splitter:hover:before {
+	opacity: 1;
+}
+
+.splitpanes.modern-theme .splitpanes__splitter.splitpanes__splitter__active {
+	z-index: 2;
+}
+
+.modern-theme.splitpanes--vertical > .splitpanes__splitter:before {
+	left: -3px;
+	right: -3px;
+	height: 100%;
+	cursor: col-resize;
+}
+
+.modern-theme.splitpanes--horizontal > .splitpanes__splitter:before {
+	top: -3px;
+	bottom: -3px;
+	width: 100%;
+	cursor: row-resize;
+}
+
+.splitpanes.no-splitter .splitpanes__pane {
+	background-color: #f8f8f8;
+}
+
+.splitpanes.no-splitter .splitpanes__splitter {
+	background-color: #ccc;
+	position: relative;
+}
+
+.no-splitter.splitpanes--horizontal > .splitpanes__splitter:before {
+	width: 0.125rem;
+	pointer-events: none;
+	cursor: none;
+}
+
+.no-splitter.splitpanes--vertical > .splitpanes__splitter:before {
+	height: 0.125rem;
+	pointer-events: none;
+	cursor: none;
+}
+
+input[type='number'].nospin::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+.noScrollBar {
+	-ms-overflow-style: none;
+	scrollbar-width: none; /* Masque la barre de défilement */
+	-webkit-overflow-scrolling: touch;
+}
+
+.noScrollBar::-webkit-scrollbar {
+	display: none;
+}
