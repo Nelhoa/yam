@@ -6,7 +6,6 @@
 	import type { CellsGroup } from '$lib/models/Cells';
 
 	export let cellsGroup: CellsGroup;
-	export let game: Game;
 	$: subtotal = derived(
 		cellsGroup.cells.map((i) => i.score),
 		(scores) => scores.reduce((p, c) => p + c, 0)
@@ -24,7 +23,7 @@
 	</div>
 	<div class="flex flex-col gap-2">
 		{#each cellsGroup.cells as cell}
-			<BaseCell {cell} {game} />
+			<BaseCell {cell} />
 		{/each}
 	</div>
 </div>

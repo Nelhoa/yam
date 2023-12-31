@@ -9,7 +9,6 @@
 	import { CellEditable, type AnyCell, DerivedCell } from '$lib/models/Cells';
 
 	export let cell: AnyCell;
-	export let game: Game;
 	let ModalRemote: ModalElement;
 	$: score = cell.score;
 	$: isEditable = cell instanceof CellEditable;

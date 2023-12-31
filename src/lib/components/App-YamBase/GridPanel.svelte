@@ -24,7 +24,7 @@
 	<div class="overflow-y-scroll">
 		<div class="flex flex-col gap-5 p-5 py-0">
 			{#each cellsGroups as cellsGroup}
-				<CellsGroup game={grid.game} {cellsGroup} />
+				<CellsGroup {cellsGroup} />
 			{/each}
 		</div>
 	</div>
