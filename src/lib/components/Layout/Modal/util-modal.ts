@@ -31,7 +31,12 @@ export class ModalClass {
 		this.removeParentCloseFunction();
 	}
 
-	closeModalHandler = this.close.bind(this);
+	closeFromParentModal() {
+		console.log('Parent Close');
+		this.close();
+	}
+
+	closeModalHandler = this.closeFromParentModal.bind(this);
 
 	async addParentCloseFunction() {
 		const anchor = get(this.anchor);
@@ -41,11 +46,13 @@ export class ModalClass {
 		if (!parentModal) return;
 		await wait(30);
 		parentModal.addEventListener('click', this.closeModalHandler);
+		parentModal.addEventListener('contextmenu', this.closeModalHandler);
 	}
 
 	async removeParentCloseFunction() {
 		if (!this.parentModal) return;
 		this.parentModal.removeEventListener('click', this.closeModalHandler);
+		this.parentModal.removeEventListener('contextmenu', this.closeModalHandler);
 	}
 
 	setSubscriber =

@@ -7,5 +7,25 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"tailwindCSS.classAttributes": ["class", "className", "ngClass", ".*Styles"],
-	"testing.automaticallyOpenPeekView": "never"
+	"testing.automaticallyOpenPeekView": "never",
+	"workbench.colorCustomizations": {
+		"activityBar.activeBackground": "#006331",
+		"activityBar.background": "#006331",
+		"activityBar.foreground": "#e7e7e7",
+		"activityBar.inactiveForeground": "#e7e7e799",
+		"activityBarBadge.background": "#af60ff",
+		"activityBarBadge.foreground": "#15202b",
+		"commandCenter.border": "#e7e7e799",
+		"sash.hoverBorder": "#006331",
+		"statusBar.background": "#003018",
+		"statusBar.foreground": "#e7e7e7",
+		"statusBarItem.hoverBackground": "#006331",
+		"statusBarItem.remoteBackground": "#003018",
+		"statusBarItem.remoteForeground": "#e7e7e7",
+		"titleBar.activeBackground": "#003018",
+		"titleBar.activeForeground": "#e7e7e7",
+		"titleBar.inactiveBackground": "#00301899",
+		"titleBar.inactiveForeground": "#e7e7e799"
+	},
+	"peacock.color": "#003018"
 }

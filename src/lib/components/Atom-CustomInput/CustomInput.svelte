@@ -88,8 +88,9 @@
 	}
 
 	function handleButtonFocus() {
-		const button = ButtonToolTip?.getAnchor();
-		button?.click();
+		openEditing();
+		// const button = ButtonToolTip?.getAnchor();
+		// button?.click();
 	}
 
 	onMount(async () => {

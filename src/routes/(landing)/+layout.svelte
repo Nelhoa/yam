@@ -4,7 +4,5 @@
 </script>
 
 <div class="h-screen overflow-x-auto">
-	<div class="my-5" in:fade>
-		<slot />
-	</div>
+	<slot />
 </div>
