@@ -1,5 +1,5 @@
 import { derived } from 'svelte/store';
-import type { GridBuilder, GridRule } from '.';
+import type { GridBuilder, GridRule } from '../Builders';
 import { CellEditable, DerivedCell, type CellsGroup } from '../Cells';
 import { YamUtil } from '../utils';
 
@@ -46,7 +46,7 @@ const builder: GridBuilder = (grid) => {
 				return total;
 			}
 		),
-		'Bonus des uns'
+		'Boost'
 	);
 
 	const plusMoinsGroup: CellsGroup = {
@@ -57,8 +57,7 @@ const builder: GridBuilder = (grid) => {
 	const bottomGroup: CellsGroup = {
 		cells: [
 			new CellEditable(grid, { min: 5, max: 30, increment: 1 }, 'Brelan'),
-			new CellEditable(grid, [15], 'Petite suite'),
-			new CellEditable(grid, [20], 'Grande Suite'),
+			new CellEditable(grid, [20], 'Suite'),
 			new CellEditable(grid, [30], 'Full'),
 			new CellEditable(grid, [40], 'Carré'),
 			new CellEditable(grid, [50], 'Yam'),
@@ -73,6 +72,5 @@ const builder: GridBuilder = (grid) => {
 export const foufouGrid: GridRule = {
 	builder,
 	title: 'Foufou Mode',
-	rules: '',
-	deprecated: true
+	rules: ''
 };

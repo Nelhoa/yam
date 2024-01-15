@@ -37,7 +37,11 @@
 
 	function addGrid(player: Player) {
 		game.addGrid(player);
-		MenuModal?.close();
+		// MenuModal?.close();
+	}
+
+	function remove(player: Player) {
+		game.removePlayer(player);
 	}
 </script>
 
@@ -45,13 +49,33 @@
 	bind:Modal={MenuModal}
 	buttonStyles="px-5 py-1 text-sm  font-bold bg-white/10 hover:bg-white/20 font-poppins rounded"
 	modalStyles="w-[90%] max-w-[300px] bg-black/50 backdrop-blur-lg text-white h-[70vh]"
-	backdropStyles="bg-black/30"
+	backdropStyles="bg-black/20 backdrop-blur-sm"
 >
-	<svelte:fragment slot="button">+ Joueur</svelte:fragment>
+	<svelte:fragment slot="button">Joueurs</svelte:fragment>
 	<svelte:fragment slot="menu">
 		{#if !addPlayerMode}
-			<div class="grid h-full min-h-0 grid-rows-[1fr_auto]">
+			<div class="grid h-full min-h-0 grid-rows-[1fr_1fr_auto]">
 				<div class="flex min-h-0 flex-col gap-2 overflow-y-auto p-5">
+					<div>En jeu</div>
+					{#each playersInGame as player}
+						<div class="grid grid-cols-[1fr_auto] gap-2">
+							<button
+								class="truncate rounded bg-white/10 px-3 py-[5px] text-left font-semibold text-white hover:bg-white/20"
+								on:click={() => addGrid(player)}
+							>
+								{player.name}
+							</button>
+							<button
+								on:click={() => remove(player)}
+								class="h-full rounded bg-white/5 px-2 text-white/30 hover:bg-white/10"
+							>
+								<Bin width={13} />
+							</button>
+						</div>
+					{/each}
+				</div>
+				<div class="flex min-h-0 flex-col gap-2 overflow-y-auto p-5">
+					<div>Vos joueurs</div>
 					{#each filteredPlayers as player}
 						<div class="grid grid-cols-[1fr_auto] gap-2">
 							<button
@@ -72,10 +96,14 @@
 						</div>
 					{/each}
 				</div>
-				<div class="p-5">
+				<div class="flex gap-3 p-5">
 					<button
 						class="rounded bg-green-500/50 px-3 py-1 hover:bg-green-500/80"
 						on:click={() => (addPlayerMode = true)}>Ajouter un joueur</button
+					>
+					<button
+						class="rounded bg-black/40 px-3 py-1 hover:bg-black/80"
+						on:click={() => MenuModal?.close()}>Retour</button
 					>
 				</div>
 			</div>

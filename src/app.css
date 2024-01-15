@@ -30,6 +30,12 @@
 	.invalid {
 		@apply mt-1 px-[2px] text-sm font-semibold text-yellow-600 text-balance dark:text-orange-400;
 	}
+
+	.yamBackground {
+		background-color: #0e7133;
+		background-image: url('/yam-texture.jpg');
+		background-blend-mode: multiply;
+	}
 }
 
 *::-webkit-scrollbar {

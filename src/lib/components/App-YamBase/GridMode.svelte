@@ -2,6 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import type { Game } from '$lib/models/yam';
 	import GridPanel from './GridPanel.svelte';
+	import GridPanelHeader from './GridPanelHeader.svelte';
 	import PlayerList from './PlayerList.svelte';
 	import { flip } from 'svelte/animate';
 	import _ from 'lodash';
@@ -11,31 +12,40 @@
 
 	export let game: Game;
 	$: grids = game.grids;
-	$: sortedGrids = _.orderBy($grids, (grid) => grid.player.name);
 
 	function restart() {
 		dispatch('restart');
 	}
 </script>
 
-<div class="m-auto grid h-full w-full bg-[#0E7133] py-[3vh]" in:fade>
-	<div class="grid h-full min-h-0 grid-rows-[1fr_auto] gap-4">
+<div class="yamBackground m-auto grid h-full w-full pb-[3vh]" in:fade>
+	<div class="grid h-full min-h-0 grid-rows-[90px_1fr_auto]">
+		<div class="grid h-full grid-flow-col justify-center overflow-y-scroll">
+			<div class="h-full w-[110px]"></div>
+			<div class="grid h-full shrink-0 grid-flow-col justify-center gap-0 overflow-x-auto">
+				{#each $grids as grid (grid)}
+					<div class="w-[100px]">
+						<GridPanelHeader {grid} />
+					</div>
+				{/each}
+			</div>
+		</div>
 		<div class="grid h-full min-h-0 grid-flow-col justify-center overflow-y-scroll">
-			{#if sortedGrids[0]}
+			{#if $grids[0]}
 				<div class="h-full w-[110px]">
-					<GridBase grid={sortedGrids[0]} />
+					<GridBase grid={$grids[0]} />
 				</div>
 
-				<div class="h-full shrink-0 justify-center gap-0 overflow-x-auto">
-					{#each sortedGrids as grid (grid)}
-						<div class="h-full min-h-0 w-[180px] shrink-0" animate:flip>
+				<div class="grid shrink-0 grid-flow-col gap-0">
+					{#each $grids as grid (grid)}
+						<div class="w-[100px] shrink-0" animate:flip>
 							<GridPanel {grid} />
 						</div>
 					{/each}
 				</div>
 			{/if}
 		</div>
-		<div class="mt-auto flex items-center justify-center gap-3">
+		<div class="mt-auto flex items-center justify-center gap-3 pt-5">
 			<button on:click={restart}>
 				<img
 					src="https://cdn-icons-png.flaticon.com/512/8027/8027947.png"

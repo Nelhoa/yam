@@ -3,17 +3,18 @@
 	import type { ModalElement } from '$lib/components/Layout/Modal/util-modal';
 	import { cn } from '$lib/utils/cn';
 	import { fly } from 'svelte/transition';
-	import type { Game } from '$lib/models/yam';
 	import _ from 'lodash';
 	import Cross from '$lib/components/Icon/Cross.svelte';
-	import { CellEditable, type AnyCell, DerivedCell } from '$lib/models/Cells';
+	import { CellEditable, type AnyCell } from '$lib/models/Cells';
+	import { cellClicked } from '$lib/models/store-cell-clicked';
+	import { col } from './colors';
 
 	export let cell: AnyCell;
+	export let index: number;
 	let ModalRemote: ModalElement;
 	$: score = cell.score;
 	$: isEditable = cell instanceof CellEditable;
 	$: isDone = cell instanceof CellEditable ? cell.isDone : undefined;
-	$: notEditableDone = cell instanceof DerivedCell && $score > 0;
 	$: isModalOpen = ModalRemote?.isVisible;
 
 	function setScore(value: number) {
@@ -27,28 +28,53 @@
 		if (!(cell instanceof CellEditable)) return;
 		cell.resetScore();
 	}
+
+	$: if ($isModalOpen) cellClicked.set(cell as CellEditable);
+	$: if (!$isModalOpen) cellClicked.set(undefined);
+	$: rowClicked = $cellClicked?.name === cell.name;
+	$: playerClicked = $cellClicked?.grid === cell.grid;
+	$: isClicked = $cellClicked === cell;
+	$: highlight = rowClicked || playerClicked;
+	$: theme = col[index % 2]!;
+	$: color = isClicked ? theme.selected : highlight ? theme.highlighted : theme.normal;
 </script>
 
 <Modal
 	mode="flip"
 	bind:Modal={ModalRemote}
 	disabled={!isEditable}
-	modalStyles="p-4 bg-black/50 backdrop-blur border border-red-700 min-h-0 max-h-[40vh] overflow-y-auto"
-	backdropStyles="bg-black/20"
+	modalStyles="p-4 z-50 bg-black/50 backdrop-blur border border-red-700 min-h-0 max-h-[40vh] overflow-y-auto"
+	backdropStyles="bg-black/10 backdrop-blur-[2px] z-10"
+	buttonCSS={`background-color: ${color}; z-index: ${highlight ? 20 : 0}; position: ${
+		highlight ? 'relative' : 'static'
+	};`}
 	buttonStyles={cn(
-		'rounded border border-transparent flex px-3 h-[30px] bg-green-800/80 hover:bg-green-700 gap-2 justify-between items-center',
-		isEditable && !$isDone && 'border-green-400 bg-green-700/70',
-		$isModalOpen && 'bg-green-700 border-green-600',
-		!isEditable && 'bg-black/10 hover:bg-black/10'
+		'group transition-colors flex h-[38px] w-full justify-center  items-center truncate border-b-[1.5px] border-r-[1.5px] border-b-black/[.15] border-r-black/[.15] px-3 font-bold',
+		isClicked && 'border  bg-white rounded'
 	)}
 >
 	<svelte:fragment slot="button">
-		<div class={cn('text-sm', isEditable && $isDone && 'opacity-50')}>{cell.name}</div>
 		{#key $score}
 			<div class="font-semibold" in:fly={{ y: 10 }}>
-				{#if isEditable ? $isDone && $score > 0 : $score > 0}{$score}{:else if $isDone}
-					<div class="opacity-50">
-						<Cross width={11} />
+				{#if isEditable ? $isDone && $score > 0 : $score > 0}
+					<div
+						class={cn('text-[18px]', !isEditable && 'text-green-400')}
+						style="text-shadow: 1px 1px 2px rgba(0,0,0,70%);"
+					>
+						{$score}
+					</div>
+				{:else if isEditable && !$isDone}
+					<div
+						style="box-shadow: 1px 1px 4px rgba(0,0,0,80%);"
+						class={cn(
+							'h-[20px] w-[20px] rounded-full border border-[#4ADE80] bg-[#13863E] transition-opacity transition-transform group-hover:scale-125 group-hover:border-[#afffcd] group-hover:bg-[#29bb5f]',
+							$cellClicked && 'opacity-0',
+							isClicked && 'opacity-0'
+						)}
+					></div>
+				{:else if $isDone}
+					<div class="opacity-30">
+						<Cross width={14} />
 					</div>
 				{/if}
 			</div>

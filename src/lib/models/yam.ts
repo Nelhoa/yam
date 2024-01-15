@@ -20,7 +20,7 @@ export class Game {
 	builderName: keyof typeof builders;
 	builderTitle: string;
 	builderRules: string;
-	gridMode = writable<boolean>(false);
+	gridMode = writable<boolean>(true);
 
 	constructor(row: Prettify<Partial<GameRow>>) {
 		this.builderName = row.builder ?? 'cosquericGrid';
@@ -49,7 +49,7 @@ export class Game {
 	}
 
 	sortGrids() {
-		this.grids.update((grids) => _.orderBy(grids, (grid) => get(grid.score), 'desc'));
+		// this.grids.update((grids) => _.orderBy(grids, (grid) => get(grid.score), 'desc'));
 	}
 
 	save() {
@@ -104,8 +104,8 @@ export class Grid {
 			});
 			this.game.sortGrids();
 		}
-		this.player.grids.update((list) => [this, ...list]);
-		this.game.grids.update((list) => [this, ...list]);
+		this.player.grids.update((list) => [...list, this]);
+		this.game.grids.update((list) => [...list, this]);
 		this.select();
 	}
 

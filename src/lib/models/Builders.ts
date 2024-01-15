@@ -3,7 +3,6 @@ import type { CellsGroup } from './Cells';
 import { cosquericGrid } from './Builders/cosqueric-grid';
 import { parisGrid } from './Builders/paris-grid';
 import { foufouGrid } from './Builders/foufou-grid';
-import { foufouGrid2 } from './Builders/foufou-grid-2';
 
 export type GridRule = { builder: GridBuilder; title: string; rules: string; deprecated?: true };
 export type GridBuilder = (grid: Grid) => CellsGroup[];
@@ -12,8 +11,7 @@ export type buildersKey = keyof typeof builders;
 export const builders = {
 	parisGrid,
 	cosquericGrid,
-	foufouGrid,
-	foufouGrid2
+	foufouGrid
 } satisfies Record<string, GridRule>;
 
 export const buildersArray = Object.entries(builders) as [buildersKey, GridRule][];
