@@ -4,7 +4,6 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { superForm } from 'sveltekit-superforms/client';
-	import CalendlyModal from '$lib/components/CalendlyModal.svelte';
 	import { PUBLIC_SITE_TITLE } from '$env/static/public';
 
 	export let data;
@@ -76,12 +75,6 @@
 				class="mb-5 rounded bg-blueBank/20 px-3 py-[6px] text-[15px] font-semibold text-black hover:bg-blueBank/10 hover:shadow-lg hover:shadow-blueBank/30 dark:bg-blueBank/20 dark:text-white/70 dark:hover:bg-blueBank/50 dark:hover:text-white dark:hover:shadow-none lg:text-[16px]"
 				>S’inscrire gratuitement</button
 			>
-			<CalendlyModal>
-				<button
-					class="mb-5 w-full rounded bg-black/5 px-3 py-[6px] text-[15px] font-semibold text-black hover:bg-blueBank/10 hover:shadow-lg hover:shadow-blueBank/30 dark:bg-white/10 dark:text-white/70 dark:hover:bg-blueBank/50 dark:hover:text-white dark:hover:shadow-none lg:text-[16px]"
-					>Réserver une démo</button
-				>
-			</CalendlyModal>
 		</div>
 	</div>
 
