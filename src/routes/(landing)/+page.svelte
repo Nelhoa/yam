@@ -53,7 +53,7 @@
 			</div>
 
 			<GamesList buttonStyles="mt-5" on:select={selectGame} />
-			<div class="mt-5 text-sm text-white/50">© Neil Savin 2023</div>
+			<div class="mt-5 text-sm text-white/50">© Neil Savin 2024</div>
 		</div>
 	</div>
 {/if}
