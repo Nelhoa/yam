@@ -8,6 +8,7 @@
 	import _ from 'lodash';
 	import { createEventDispatcher } from 'svelte';
 	import GridBase from './GridBase.svelte';
+	import FullScreenButton from './FullScreenButton.svelte';
 	const dispatch = createEventDispatcher();
 
 	export let game: Game;
@@ -57,6 +58,7 @@
 			<button class="rounded bg-black/20 px-3 py-[1px]" on:click={() => game.gridMode.set(false)}
 				>Vue solo</button
 			>
+			<FullScreenButton />
 		</div>
 	</div>
 </div>
