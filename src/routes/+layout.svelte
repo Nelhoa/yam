@@ -45,15 +45,15 @@
 
 <svelte:head>
 	<title>{siteTitle}</title>
-	<meta property="og:title" content="Le Yam !" />
+	<meta property="og:title" content="Le Yams !" />
 	<meta
 		property="og:description"
-		content="Gérer facilement votre plan de trésorerie et vos décisions d’investissement"
+		content="La grille de Yams ne s’est jamais remplie aussi facilement !"
 	/>
-	<meta property="og:image" content={`${PUBLIC_SITE_URL}/og-image-bank-data.jpg`} />
-	<meta property="og:url" content="https://bank-data.app" />
-	<meta property="og:image:width" content="1024" />
-	<meta property="og:image:height" content="768" />
+	<!-- <meta property="og:image" content={`${PUBLIC_SITE_URL}/og-image-bank-data.jpg`} /> -->
+	<meta property="og:url" content="https://le-yams.com" />
+	<!-- <meta property="og:image:width" content="1024" /> -->
+	<!-- <meta property="og:image:height" content="768" /> -->
 </svelte:head>
 
 <div
