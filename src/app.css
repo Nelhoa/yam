@@ -32,9 +32,14 @@
 	}
 
 	.yamBackground {
-		background-color: #0e7133;
-		background-image: url('/yam-texture.jpg');
-		background-blend-mode: multiply;
+		background-color: #0e7133; /* Couleur de fond de base */
+	}
+
+	@supports (background-blend-mode: multiply) {
+		.yamBackground {
+			background-image: url('/yam-texture.jpg');
+			background-blend-mode: multiply;
+		}
 	}
 }
 
