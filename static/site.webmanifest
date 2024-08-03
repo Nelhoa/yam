@@ -1,6 +1,6 @@
 {
-	"name": "",
-	"short_name": "",
+	"name": "Le yams !",
+	"short_name": "Yams",
 	"icons": [
 		{
 			"src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
 			"type": "image/png"
 		}
 	],
-	"theme_color": "#ffffff",
-	"background_color": "#DA0037",
+	"theme_color": "#0D6B31",
+	"background_color": "#0D6B31",
 	"display": "standalone"
 }
