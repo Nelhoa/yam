@@ -37,6 +37,7 @@
 			<svelte:fragment slot="button">Scores</svelte:fragment>
 			<svelte:fragment slot="menu">
 				<div class="grid h-full min-h-0 grid-rows-[auto_1fr] p-5">
+					<div class="mb-2">Meilleurs scores en Foufou Mode !</div>
 					<div class="px-3">
 						<div class="grid grid-cols-[1fr_55px_55px_55px_55px] gap-x-1 text-white/50">
 							<div class="text-left">Joueur</div>

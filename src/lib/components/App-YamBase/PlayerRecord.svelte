@@ -13,7 +13,7 @@
 	$: best = Math.max(...scores);
 	$: worst = Math.min(...scores);
 	$: total = scores.reduce((cur, prev) => prev + cur, 0);
-	$: average = total / scores.length;
+	$: average = Math.round(total / scores.length);
 </script>
 
 {#if selectedRuleGrids.length > 0}
