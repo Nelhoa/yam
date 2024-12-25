@@ -7,6 +7,7 @@
 	import GamesList from '$lib/components/App-YamBase/GamesList.svelte';
 	import { buildersArray, type buildersKey } from '$lib/models/Builders';
 	import GridMode from '$lib/components/App-YamBase/GridMode.svelte';
+	import PlayerScores from '$lib/components/App-YamBase/PlayerScores.svelte';
 
 	let game: GameClass | undefined = undefined;
 	$: gridMode = game?.gridMode;
@@ -52,7 +53,10 @@
 				{/each}
 			</div>
 
-			<GamesList buttonStyles="mt-5" on:select={selectGame} />
+			<div class="mt-5 flex justify-center gap-3">
+				<GamesList buttonStyles="" on:select={selectGame} />
+				<PlayerScores buttonStyles="" />
+			</div>
 			<div class="mt-5 text-sm text-white/50">© Neil Savin 2024</div>
 		</div>
 	</div>
