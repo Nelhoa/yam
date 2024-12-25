@@ -1,20 +1,24 @@
 <script lang="ts">
 	import CenteredModal from '$lib/components/Layout/Modal/CenteredModal.svelte';
 	import type { ModalElement } from '$lib/components/Layout/Modal/util-modal';
-	import Bin from '$lib/components/Icon/Bin.svelte';
-	import { deleteGame, games } from '$lib/models/store-games';
-	import type { Game } from '$lib/models/yam';
-	import { createEventDispatcher } from 'svelte';
+	import { games } from '$lib/models/store-games';
 	import { cn } from '$lib/utils/cn';
 	import { get } from 'svelte/store';
-	import { fly, slide } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import _ from 'lodash';
 	import { players } from '$lib/models/store-players';
 	import PlayerRecord from './PlayerRecord.svelte';
-	const dispatch = createEventDispatcher();
+	import type { buildersKey } from '$lib/models/Builders';
 
 	let MenuModal: ModalElement;
 	export let buttonStyles = '';
+	let selectedMode: buildersKey = 'foufouGrid';
+	const modes: Record<buildersKey, { title: string }> = {
+		cosquericGrid: { title: 'Cosquéric' },
+		foufouGrid: { title: 'Foufou' },
+		parisGrid: { title: 'Paris' }
+	};
+	const modesKey = Object.keys(modes) as buildersKey[];
 
 	$: sortedGames = _.orderBy(
 		$games.filter((i) => get(i.grids).length > 0),
@@ -37,7 +41,19 @@
 			<svelte:fragment slot="button">Scores</svelte:fragment>
 			<svelte:fragment slot="menu">
 				<div class="grid h-full min-h-0 grid-rows-[auto_1fr] p-5">
-					<div class="mb-2">Meilleurs scores en Foufou Mode !</div>
+					<div class="mb-2 flex gap-2">
+						{#each modesKey as key}
+							<button
+								class={cn(
+									'rounded border border-transparent bg-white/10 px-2 hover:bg-white/20',
+									selectedMode === key && 'border-white'
+								)}
+								on:click={() => (selectedMode = key)}
+							>
+								{modes[key].title}
+							</button>
+						{/each}
+					</div>
 					<div class="px-3">
 						<div class="grid grid-cols-[1fr_55px_55px_55px_55px] gap-x-1 text-white/50">
 							<div class="text-left">Joueur</div>
@@ -47,7 +63,7 @@
 							<di class="text-center">Nb.</di>
 						</div>
 						{#each $players as player}
-							<PlayerRecord {player} />
+							<PlayerRecord {player} ruleKey={selectedMode} />
 						{/each}
 					</div>
 				</div></svelte:fragment
