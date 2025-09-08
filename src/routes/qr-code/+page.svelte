@@ -1,19 +1,21 @@
 <script>
 	import QRCode from 'qrcode-svg';
-	import { groupAdjacentRects } from './group-square';
+	import { groupSVGRects } from './group-square';
+	import { minimiseSVG } from './minimise';
+	import { roundQRCodeSVG } from './clean-qr-code';
 
 	let url = 'https://example.com'; // valeur par défaut
 	let svgCode = '';
 	generate();
 
-	function generate() {
+	async function generate() {
 		const qr = new QRCode({
 			content: url,
 			padding: 0,
 			container: 'svg-viewbox', // pour que ça prenne la bonne taille
 			join: false
 		});
-		svgCode = qr.svg(); // chaîne SVG
+		svgCode = await minimiseSVG(groupSVGRects(qr.svg()).svg);
 	}
 
 	function download() {
