@@ -75,7 +75,7 @@ const builder: GridBuilder = (grid) => {
 				return 50;
 			}
 		),
-		'Parfait'
+		'Parfait '
 	);
 
 	const bottomGroup: CellsGroup = {
