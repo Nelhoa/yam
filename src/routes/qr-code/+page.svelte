@@ -35,7 +35,7 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="/qrcodefav.png" />
 </svelte:head>
 
-<div class="mx-auto w-[84vw] max-w-[400px] py-5">
+<div class="mx-auto w-[84vw] max-w-[400px] py-5 text-black dark:text-black">
 	<h1 class="mb-5 text-xl font-bold">QR Code</h1>
 	<!-- <div class="mb-1 text-sm font-semibold">Votre URL</div> -->
 	<div class="grid w-full grid-cols-[20px_1fr] items-center gap-3">
