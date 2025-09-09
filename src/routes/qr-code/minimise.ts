@@ -5,13 +5,18 @@ import { removeDoubles } from './removeDoubles';
 export async function minimiseSVG(svgString: string) {
 	const svgJson = await parse(svgString);
 
-	const scale = 1000; // travailler sur des entiers pour Clipper
+	const scale = 1000000; // Très haute précision pour éviter les erreurs d'arrondi
+
+	function normalizeCoord(value: number): number {
+		// Forcer l'alignement sur une grille très fine
+		return Math.round(value * 100000) / 100000;
+	}
 
 	function rectToPolygon(rect: any) {
-		const x = Math.round(parseFloat(rect.attributes.x) * scale);
-		const y = Math.round(parseFloat(rect.attributes.y) * scale);
-		const w = Math.round(parseFloat(rect.attributes.width) * scale);
-		const h = Math.round(parseFloat(rect.attributes.height) * scale);
+		const x = Math.round(normalizeCoord(parseFloat(rect.attributes.x)) * scale);
+		const y = Math.round(normalizeCoord(parseFloat(rect.attributes.y)) * scale);
+		const w = Math.round(normalizeCoord(parseFloat(rect.attributes.width)) * scale);
+		const h = Math.round(normalizeCoord(parseFloat(rect.attributes.height)) * scale);
 		return [
 			{ X: x, Y: y },
 			{ X: x + w, Y: y },
@@ -27,6 +32,8 @@ export async function minimiseSVG(svgString: string) {
 		const clipperPolygons = rects.map(rectToPolygon);
 
 		const c = new ClipperLib.Clipper();
+		c.StrictlySimple = true; // Forcer des polygones simples
+
 		clipperPolygons.forEach((poly) => c.AddPath(poly, ClipperLib.PolyType.ptSubject, true));
 
 		const solution: ClipperLib.Paths = [];
@@ -37,10 +44,8 @@ export async function minimiseSVG(svgString: string) {
 			ClipperLib.PolyFillType.pftNonZero
 		);
 
-		// Nettoyer et arrondir pour la grille
-		const cleaned = solution.map((poly) => ClipperLib.Clipper.CleanPolygon(poly, 0));
-
-		const pathD = cleaned
+		// Ne pas nettoyer du tout pour voir si c'est ça qui cause le problème
+		const pathD = solution
 			.map((polygon) => 'M' + polygon.map((p) => `${p.X / scale} ${p.Y / scale}`).join('L') + 'Z')
 			.join(' ');
 
