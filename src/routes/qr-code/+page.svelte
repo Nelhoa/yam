@@ -2,7 +2,6 @@
 	import QRCode from 'qrcode-svg';
 	import { groupSVGRects } from './group-square';
 	import { minimiseSVG } from './minimise';
-	import { roundQRCodeSVG } from './clean-qr-code';
 
 	let url = 'https://example.com'; // valeur par défaut
 	let svgCode = '';
@@ -27,6 +26,11 @@
 		URL.revokeObjectURL(link.href);
 	}
 </script>
+
+<svelte:head>
+	<title>QR Code</title>
+	<link rel="icon" type="image/png" sizes="32x32" href="/qrcodefav.png" />
+</svelte:head>
 
 <div class="mx-auto w-[84vw] max-w-[400px] py-5">
 	<h1 class="mb-5 text-xl font-bold">QR Code</h1>
